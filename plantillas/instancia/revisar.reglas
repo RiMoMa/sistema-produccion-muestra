@@ -1,0 +1,8 @@
+# Reglas de revisión mecánica de <proyecto>.
+# Las lee sistema/nucleo/verificacion/revisar.py.
+# Formato: tipo | etiqueta | patrón | nota | ámbito | patrón2
+# Tipos: falla, aviso, falla_sin, aviso_sin, aviso_cerca, aviso_cifras (ver el motor).
+# Cada regla nace de un error que ya ocurrió: anote cuál en el comentario.
+
+# Ejemplo: cifras en un documento sin ninguna cita.
+aviso_cifras | porcentajes sin ninguna cita en el documento | [0-9]+([,.][0-9]+)? ?% | Si es una cifra afirmada, necesita fuente. |  | (et al|doi|https?://)

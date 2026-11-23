@@ -1,0 +1,13 @@
+# Lo que el motor lee de esta instancia. Las rutas son relativas a la raíz de la instancia.
+nombre = "<instancia>"
+decisiones = "contexto/decisiones.md"
+indice = "contexto/indice-decisiones.md"
+# Los tipos de pieza de esta instancia. `todas` y `sin-efecto` los pone el motor.
+tipos = ["<tipo-1>", "<tipo-2>"]
+
+# Un rol por cada nodo del motor que recibe reglas. `decisiones = false` si el rol no lleva el índice.
+[roles.verificador]
+archivos = ["contexto/estilo.md", "verificacion/checklist-qa.md", "contexto/pruebas-dominio.md"]
+
+[roles.borrador]
+archivos = ["contexto/estilo.md"]
