@@ -1,0 +1,31 @@
+{
+  "proyecto": "clase-05",
+  "salida": "imagenes",
+  "paleta": [],
+  "imagenes": [
+    {
+      "id": "FIG-1",
+      "archivo": "rect-sinc.png",
+      "tipo": "ilustracion",
+      "ancho": 1837,
+      "alto": 773,
+      "descripcion": "Two pulses of different width and their sinc spectra (graficas.py)."
+    },
+    {
+      "id": "FIG-2",
+      "archivo": "escalon-limite.png",
+      "tipo": "ilustracion",
+      "ancho": 1787,
+      "alto": 766,
+      "descripcion": "Real and imaginary parts of 1/(ε+jω) as ε shrinks (graficas.py)."
+    },
+    {
+      "id": "FIG-3",
+      "archivo": "rc-salida.png",
+      "tipo": "ilustracion",
+      "ancho": 1279,
+      "alto": 785,
+      "descripcion": "Input, correct output and the wrong product for the RC example (graficas.py)."
+    }
+  ]
+}

@@ -98,16 +98,23 @@ These modules exist in private projects and have been used there. Connecting the
 | Tutorial videos | Screen recording to edited tutorial: transcription, script, voice and assembly, with gates | Rendered tutorials; automated tests | Video line |
 | Animated video | Script to keyframes, clips, voice, music and export in two languages | A pilot episode exported in Spanish and English | Video line |
 
-## Possible uses and next steps
+## Example output
 
-Beyond that integration, these are ideas and are not built yet:
+[**A Fourier transform lecture**](examples/fourier-lecture/): instructions, notes, PDF, 13-slide deck, numerical checks and review history. It was made as a test with an earlier version of the system, before this engine.
 
-- **Code review:** agents would propose diffs, and tests and mutants would run as a stage.
-- **Documentation and release notes:** a new domain would need only its own rules.
-- **Parallel reviewers:** different model families could review the same piece, with reports merged by rule.
-- **Evaluation bench:** planted errors would measure a reviewer before and after a prompt change.
-- **Spending cap:** the cost report could become a gate.
-- **Business tools:** CRM or database steps would sit behind the same filter, with declared permissions.
+<p align="center"><a href="examples/fourier-lecture/"><img src="examples/fourier-lecture/produccion/clase-05/qa/hoja-1.png" alt="Contact sheet of the Fourier lecture deck" width="70%"></a></p>
+
+## Uses: done and next
+
+| Use | Already done | Next |
+|---|---|---|
+| Another domain | The Fourier lecture: different subject, language and type of error | Technical documentation and release notes |
+| Parallel review | Two Claude reviewers, content and sources, run in parallel outside this engine | Parallel stages and different model families |
+| Reviewer evaluation | One test with 6 planted errors | A bench that repeats it after each prompt change |
+| Code quality | This engine's controls were tested with 194 mutants | Tests and mutants as a stage for agent-written diffs |
+| Cost control | Tokens and cost measured per role | A spending limit that stops the line |
+| Images | ComfyUI batches and images for decks | An image stage with a human gate |
+| Business tools | Not started | CRM and databases behind the filter, with declared permissions |
 
 ## Run it
 

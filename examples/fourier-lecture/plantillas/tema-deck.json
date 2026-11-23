@@ -1,0 +1,13 @@
+{
+  "_nota": "Tema neutro (D1): sin marca de una universidad británica. Derivado de nucleo/decks/tema-ejemplo.json.",
+  "layout": "LAYOUT_WIDE",
+  "fuente": "Calibri",
+  "fuenteMono": "Consolas",
+  "colores": {
+    "primario": "1F3A5F", "oscuro": "111827", "acento": "B45309", "texto": "1F2937",
+    "tenue": "6B7280", "tarjeta": "F3F4F6", "linea": "D1D5DB"
+  },
+  "fondos": { "portada": "111827", "interior": "FFFFFF", "cierre": "111827" },
+  "geometria": { "margen": 0.75, "ancho": 11.83, "yTitulo": 0.6, "yCuerpo": 1.6, "yMax": 7.0 },
+  "ramas": ["Question", "Definition", "Properties", "Use"]
+}

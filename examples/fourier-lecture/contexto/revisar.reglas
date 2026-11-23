@@ -1,0 +1,17 @@
+# Reglas de revisión mecánica del escenario Fourier.
+# Las lee sistema/nucleo/verificacion/revisar.py.
+# Formato: tipo | etiqueta | patrón | nota | ámbito | patrón2
+# Cada regla nace de un error que ya ocurrió o de una regla de estilo.md.
+
+# 1. Grafía americana (estilo.md, Registro).
+# Falso positivo el 1 nov 2026: marcaba color= de matplotlib en graficas.py; se excluye el argumento (y color: de CSS).
+falla | grafía americana | \b(analyz\w*|behavior\w*|center(s|ed)?|modeling|signaling|color(s|ed)?(?!\s*[=:])|normaliz\w*|characteriz\w*|recogniz\w*|generaliz\w*|minimiz\w*|maximiz\w*)\b | Inglés británico: analyse, behaviour, centre, modelling, colour, normalise... |  |
+
+# 2. Palabras que culpan al lector (estilo.md).
+aviso | palabra que culpa al lector | \b(obviously|clearly|trivially|it is easy to see|it is trivial)\b | Decir por qué, no que es obvio. |  |
+
+# 3. Convención: ω con hertz sin conversión (pruebas-dominio, prueba 2).
+aviso | posible cambio de convención a f en hertz | (X\(f\)|2\\pi f t|e\^\{-j ?2\\pi) | Una sola convención (ω). Si se convierte, decirlo. |  |
+
+# 4. Guion largo (heredada de la primera instancia por decisión del responsable: el sistema escribe sin guiones largos).
+falla | guion largo | — | Reemplazar por dos puntos, coma, paréntesis o punto seguido. |  |

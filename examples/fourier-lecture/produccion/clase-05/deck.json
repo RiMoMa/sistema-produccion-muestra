@@ -1,0 +1,245 @@
+{
+  "titulo": "Lecture 5 · The continuous-time Fourier transform",
+  "archivo": "lecture-05-fourier-transform.pptx",
+  "tema": "../../plantillas/tema-deck.json",
+  "carpetaImagenes": "imagenes",
+  "imagenes": {
+    "FIG-1": {
+      "archivo": "rect-sinc.png",
+      "tipo": "ilustracion",
+      "ancho": 1837,
+      "alto": 773,
+      "descripcion": "Two pulses of different width and their sinc spectra (graficas.py)."
+    },
+    "FIG-2": {
+      "archivo": "escalon-limite.png",
+      "tipo": "ilustracion",
+      "ancho": 1787,
+      "alto": 766,
+      "descripcion": "Real and imaginary parts of 1/(ε+jω) as ε shrinks (graficas.py)."
+    },
+    "FIG-3": {
+      "archivo": "rc-salida.png",
+      "tipo": "ilustracion",
+      "ancho": 1279,
+      "alto": 785,
+      "descripcion": "Input, correct output and the wrong product for the RC example (graficas.py)."
+    }
+  },
+  "diapositivas": [
+    {
+      "tipo": "portada",
+      "sobretitulo": "Second-year Signals and Systems",
+      "titulo": "Lecture 5 · The continuous-time Fourier transform",
+      "linea": "From series to transform · pairs · properties · convolution · full detail, Parseval included, in the notes",
+      "notas": "One line on where we are: last lecture, periodic signals as sums of harmonics. Today, signals that happen once."
+    },
+    {
+      "tipo": "pregunta",
+      "titulo": "A pulse happens once. What are its harmonics?",
+      "insignia": "2 min · think, then hands up",
+      "formato": "mano alzada",
+      "rama": 1,
+      "consigna": "A Fourier series needs a period. A single pulse has none.",
+      "opciones": [
+        "It has no spectrum",
+        "Its spectrum is a single line",
+        "Something else: stretch the period and watch"
+      ],
+      "notas": "Do not resolve it yet. Collect a show of hands for each option and leave the question open: section 1 answers it."
+    },
+    {
+      "tipo": "flujo",
+      "titulo": "Stretch the period until one copy remains",
+      "subtitulo": "Pulse of width T repeated every T₀",
+      "rama": 1,
+      "estados": [
+        {
+          "texto": "cₖ = X(kω₀) / T₀",
+          "etiqueta": "Samples of one envelope"
+        },
+        {
+          "texto": "T₀ grows",
+          "etiqueta": "Lines crowd together"
+        },
+        {
+          "texto": "ω₀ → dω",
+          "etiqueta": "Sum becomes integral"
+        },
+        {
+          "texto": "X(ω)",
+          "etiqueta": "The envelope itself",
+          "clave": true
+        }
+      ],
+      "pie": "The transform is the envelope the series was sampling all along.",
+      "notas": "Derive c_k = X(kω₀)/T₀ on the board. The 1/T₀ = ω₀/2π is where the 1/2π of the inverse transform comes from."
+    },
+    {
+      "tipo": "prompt",
+      "titulo": "The definition, and our one convention",
+      "rama": 2,
+      "prompt": "X(ω) = ∫ x(t) exp(−jωt) dt\nx(t) = (1/2π) ∫ X(ω) exp(jωt) dω\n\nsinc(x) = sin(x)/x   (no π)",
+      "nota": "Exists for every ω when ∫|x(t)| dt < ∞. Sufficient, not necessary.",
+      "pie": "Some textbooks put π inside sinc. Their tables differ from ours.",
+      "notas": "Spend a minute on the existence condition: |x(t)exp(−jωt)| = |x(t)|. Name the step and the cosine as signals that fail it; they come back in section 3."
+    },
+    {
+      "tipo": "figura",
+      "titulo": "The pulse: narrow in time, wide in frequency",
+      "imagen": "FIG-1",
+      "rama": 2,
+      "pie": "rect(t/T) ↔ T sinc(ωT/2): X(0) is the area, first zero at ω = 2π/T.",
+      "notas": "Work the integral on the board. Then the two checks from the notes: X(0) equals the area, and the first zero is where one full cycle of exp(−jωt) fits in the pulse."
+    },
+    {
+      "tipo": "tabla",
+      "titulo": "Four pairs to know by heart",
+      "subtitulo": "Each one is checked numerically in comprobaciones.py",
+      "rama": 2,
+      "columnas": [
+        "x(t)",
+        "X(ω)",
+        "Condition"
+      ],
+      "filas": [
+        [
+          "rect(t/T)",
+          "T sinc(ωT/2)",
+          "T > 0"
+        ],
+        [
+          "exp(−at) u(t)",
+          "1 / (a + jω)",
+          "a > 0"
+        ],
+        [
+          "exp(−a|t|)",
+          "2a / (a² + ω²)",
+          "a > 0"
+        ],
+        [
+          "exp(−at²)",
+          "√(π/a) exp(−ω²/4a)",
+          "a > 0"
+        ]
+      ],
+      "notas": "Point at the condition column: the formula for exp(−at)u(t) still returns a number when a ≤ 0, and that number is meaningless."
+    },
+    {
+      "tipo": "pregunta",
+      "titulo": "Does the step have a transform?",
+      "insignia": "3 min · pairs",
+      "formato": "parejas",
+      "rama": 2,
+      "consigna": "u(t) is not absolutely integrable. Does the integral of exp(−jωt) from 0 to ∞ converge?",
+      "destacado": "Then try exp(−εt)u(t) and let ε → 0.",
+      "notas": "Pairs for three minutes. Most will write 1/(jω). Take one pair's answer and ask: is 1/(jω) even or odd? Is u(t)? That sets up the next slide."
+    },
+    {
+      "tipo": "figura",
+      "titulo": "The step as a limit",
+      "imagen": "FIG-2",
+      "rama": 2,
+      "pie": "u(t) ↔ π δ(ω) + 1/(jω): the impulse carries the average value ½.",
+      "notas": "The real part keeps area π while it narrows: that is π δ(ω). The imaginary part tends to −1/ω. Then the parity argument: u = ½ + ½ sgn(t)."
+    },
+    {
+      "tipo": "tabla",
+      "titulo": "Properties: new transforms without integrating",
+      "rama": 3,
+      "columnas": [
+        "Operation",
+        "Time",
+        "Frequency"
+      ],
+      "filas": [
+        [
+          "Time shift",
+          "x(t − t₀)",
+          "exp(−jωt₀) X(ω)"
+        ],
+        [
+          "Scaling",
+          "x(at)",
+          "(1/|a|) X(ω/a)"
+        ],
+        [
+          "Modulation",
+          "x(t) cos(ω₀t)",
+          "½[X(ω − ω₀) + X(ω + ω₀)]"
+        ],
+        [
+          "Differentiation",
+          "dx/dt",
+          "jω X(ω)"
+        ],
+        [
+          "Duality",
+          "X(t)",
+          "2π x(−ω)"
+        ],
+        [
+          "Convolution",
+          "(x ∗ h)(t)",
+          "X(ω) H(ω)"
+        ]
+      ],
+      "notas": "Derive the shift and the scaling (the |a| from swapped limits when a < 0). Show the delayed pulse in one line: rect((t−2)/4) ↔ 4 sinc(2ω) exp(−2jω)."
+    },
+    {
+      "tipo": "comparacion",
+      "titulo": "RC filter, RC = 0.5 s, input exp(−t)u(t)",
+      "rama": 4,
+      "izquierda": {
+        "etiqueta": "Multiply the spectra",
+        "texto": "Y(ω) = 2 / ((1 + jω)(2 + jω))\n     = 2/(1 + jω) − 2/(2 + jω)",
+        "mono": true
+      },
+      "derecha": {
+        "etiqueta": "Read off the pairs",
+        "texto": "y(t) = 2(exp(−t) − exp(−2t)) u(t)\n\ny(0) = 0, y → 0",
+        "mono": true
+      },
+      "pie": "Convolution in time is multiplication in frequency.",
+      "notas": "Partial fractions in the variable jω. Then the two sanity checks: y(0) = 0 because a capacitor voltage cannot jump, and y → 0 because the input decays."
+    },
+    {
+      "tipo": "figura",
+      "titulo": "The check that catches the common error",
+      "imagen": "FIG-3",
+      "rama": 4,
+      "pie": "Multiplying x(t) by h(t) jumps at t = 0. A capacitor voltage cannot.",
+      "notas": "Show the wrong curve last. The point is the habit: check t = 0 and t → ∞ before trusting any output."
+    },
+    {
+      "tipo": "tarjetas",
+      "titulo": "For the tutorial",
+      "rama": 4,
+      "tarjetas": [
+        {
+          "numero": "1–4",
+          "titulo": "Apply",
+          "texto": "Shift, convolution, the triangle, modulation."
+        },
+        {
+          "numero": "5",
+          "titulo": "Interpret",
+          "texto": "Energy in a band: why bandwidth is a choice."
+        },
+        {
+          "numero": "6",
+          "titulo": "Decide",
+          "texto": "The product of the two widths for the Gaussian: can a pulse be short and narrow?",
+          "destacada": true
+        }
+      ],
+      "pie": "Solutions are at the end of the notes, after all the problems.",
+      "notas": "Ask them to attempt all six before reading any solution."
+    },
+    {
+      "tipo": "cierre",
+      "titulo": "Questions"
+    }
+  ]
+}
