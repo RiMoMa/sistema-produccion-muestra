@@ -102,7 +102,7 @@ These modules exist in private projects and have been used there. Connecting the
 
 ## Example output
 
-[**A Fourier transform lecture**](examples/fourier-lecture/): instructions, notes, PDF, 13-slide deck, numerical checks and review history. It was made as a test with an earlier version of the system, before this engine.
+[**A Fourier transform lecture**](examples/fourier-lecture/): instructions, notes, PDF, 13-slide deck, numerical checks and review history. It was made as a test with an earlier version of the system.
 
 <p align="center"><a href="examples/fourier-lecture/"><img src="docs/img/fourier-strip.png" alt="Four slides from the Fourier lecture deck" width="100%"></a></p>
 

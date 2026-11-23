@@ -2,7 +2,7 @@
 
 A test lesson for second-year Signals and Systems, in British English. It is not official material from any university.
 
-It was made on 1 November 2026 with Claude Code and an earlier version of this production system, before the engine in this repository. The request was a signals course at British university level. The instance then set its own rules, notation and expensive errors.
+It was made on 1 November 2026 with Claude Code and an earlier version of this production system. The request was a signals course at British university level. The instance then set its own rules, notation and expensive errors.
 
 | Stage | Files |
 |---|---|
