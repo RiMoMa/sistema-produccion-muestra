@@ -2,9 +2,9 @@
 
 # sistema-produccion
 
-**A multi-model production line: DeepSeek writes, Claude checks sources and reviews, code controls the route, and a person approves.**
+**A multi-model production line. In this engine, DeepSeek writes, Claude checks sources and reviews, code controls the route, and a person approves.**
 
-It is the core of a larger system for producing PDFs, slide decks and videos. This repository publishes the core; the production modules stay private for now.
+It is the core of a larger system for producing PDFs, slide decks and videos, which uses several models. This repository publishes the core; the production modules stay private for now.
 
 Language models write quickly but should not approve their own work. This engine gives each model one job and only the permissions that job needs. Every step leaves a record, and approvals are tied to the exact content by hash.
 
@@ -110,6 +110,14 @@ These modules exist in private projects and have been used there. Connecting the
 | Tutorial videos | Screen recording to edited tutorial: transcription, script, voice and assembly, with gates | Rendered tutorials; automated tests | Video line |
 | Animated video | Script to keyframes, clips, voice, music and export in two languages | A pilot episode exported in Spanish and English | Video line |
 
+### Creative panel
+
+Before drafting, the private system can ask several models for ideas. Four voices (skepticism, experience, play and mobile) receive a short brief without house rules or earlier lessons, and do not see each other. Their ideas go to one sheet, where matches are noted. A person accepts or rejects each idea, and the writer works from the approved ones.
+
+<p align="center"><img src="docs/img/panel.png" alt="A short brief goes to four independent voices; their ideas form one sheet; a person accepts or rejects them; the writer uses the approved ideas." width="100%"></p>
+
+The panel has been used for five lessons, run outside this engine. Integrating it is planned.
+
 ## Example output
 
 [**A Fourier transform lecture**](examples/fourier-lecture/): instructions, notes, PDF, 13-slide deck, numerical checks and review history. It was made as a test with an earlier version of the system.
@@ -121,6 +129,7 @@ These modules exist in private projects and have been used there. Connecting the
 | Use | Already done | Next |
 |---|---|---|
 | Another domain | The Fourier lecture: different subject, language and type of error | Technical documentation and release notes |
+| Creative panel | Four voices in five lessons, outside this engine | Parallel LangGraph nodes |
 | Parallel review | Two Claude reviewers, content and sources, run in parallel outside this engine | Parallel stages and different model families |
 | Reviewer evaluation | One planted-error test | A bench that repeats it after each prompt change |
 | Code quality | Mutation tests on this engine | Tests and mutants as a stage for agent-written diffs |
@@ -139,9 +148,10 @@ These modules exist in private projects and have been used there. Connecting the
 python3 docs/figuras/generar.py
 python3 docs/figuras/flujo.py
 python3 docs/figuras/motor.py draw
+python3 docs/figuras/panel.py
 ```
 
-The tests use no network and spend nothing. The last three commands need matplotlib.
+The tests use no network and spend nothing. The last four commands need matplotlib.
 
 ## Scope
 
