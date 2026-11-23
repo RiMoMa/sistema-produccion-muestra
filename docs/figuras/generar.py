@@ -41,7 +41,7 @@ LINEAS_PRUEBAS = 2641
 # KPI: pytest -q (303 en 7 s), development notes (194 de 194), development notes
 # (6 de 6 sembrados), git log (47 commits), motor/modelos.py (VIAS: cuatro).
 KPIS = [("303", "tests pass", "in 7 s, no network"), ("194 / 194", "mutants detected", "controls broken on purpose"),
-        ("6 / 6", "errors caught", "seeded; none invented"), ("4", "model routes", "one function each")]
+        ("6 / 6", "errors caught", "one run, none invented"), ("4", "model routes", "one function each")]
 
 
 def preparar(t, ancho, alto):
@@ -91,7 +91,7 @@ def fig_costo(t, nombre):
 
 def fig_ronda(t, nombre):
     fig = preparar(t, 8.8, 3.5)
-    titulo(fig, t, "One correction round cut the returnable findings from 8 to 2",
+    titulo(fig, t, "Findings per round in one real run",
            "Findings per round of the verify and correct loop. Judgement calls stay with a person.")
     ax = fig.add_axes([0.07, 0.17, 0.50, 0.58])
     estilo_ejes(ax, t)
@@ -161,7 +161,6 @@ def main() -> None:
         fig_kpis(t, "kpis")
         fig_costo(t, "cost")
         fig_ronda(t, "loop")
-        fig_codigo(t, "code")
     print("figuras en", SALIDA)
 
 
