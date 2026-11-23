@@ -17,6 +17,8 @@ Language models write quickly but should not approve their own work. This engine
   </picture>
 </p>
 
+A mutant is a deliberate bug. If the tests miss it, a check is missing.
+
 ## The pipeline
 
 <p align="center"><img src="docs/img/pipeline.png" alt="Pipeline: a person approves the brief; code builds context packs; DeepSeek writes; code reviews; Claude checks sources with web only; Claude cold-reviews without tools; a person approves; delivery. Findings return to the writer." width="100%"></p>
