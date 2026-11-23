@@ -35,6 +35,6 @@ for mode, t in T.items():
     for i, (k, l) in enumerate([("model", "Model"), ("code", "Code"), ("person", "Person")]):
         ax.add_patch(Rectangle((i * 1.5, 3.9), .28, .28, fc=t[k], ec="none"))
         ax.text(i * 1.5 + .4, 4.04, l, color=t["ink"], va="center", fontsize=11, bbox=dict(fc="#0b1426", ec="none", pad=3))
-    ax.text(0, -.25, "The mechanical review and the source checker can also return the piece to the writer. Code decides every route.",
+    ax.text(0, -.25, "The mechanical review and the source checker can also return the piece to the writer. Code controls the route.",
             color=t["mut"], bbox=dict(fc="#0b1426", ec="none", pad=3), fontsize=10.5, va="center")
     f.savefig(OUT / "pipeline.png", facecolor=t["bg"], dpi=160); plt.close(f)

@@ -2,7 +2,7 @@
 
 # sistema-produccion
 
-**A multi-model production line: DeepSeek writes, Claude checks sources and reviews, code decides the route, and a person approves.**
+**A multi-model production line: DeepSeek writes, Claude checks sources and reviews, code controls the route, and a person approves.**
 
 It is the core of a larger system for producing PDFs, slide decks and videos. This repository publishes the core; the production modules stay private for now.
 
@@ -29,7 +29,9 @@ Language models write quickly but should not approve their own work. This engine
 6. **Cold review.** Claude reads the piece without the writer's conversation and returns structured findings: M (mechanical), R (rule) or J (judgement). M and R can go back to the writer within a fixed number of rounds. J goes to a person.
 7. **Delivery.** A person signs off. If approved content changes later, that approval and the later stages expire.
 
-## The agents and their permissions
+## Roles and permissions
+
+Three roles use a model. The others are code or a person.
 
 | Role | Runs on | Can do | Cannot do | Output |
 |---|---|---|---|---|
@@ -38,7 +40,7 @@ Language models write quickly but should not approve their own work. This engine
 | Mechanical reviewer | Code | Apply pattern rules | Call a model | JSON report |
 | Source checker | Claude Sonnet | `WebSearch` and `WebFetch` | Use a shell or write files | Validated JSON with URLs |
 | Cold reviewer | Claude Sonnet | Read its pack and the piece | Use tools | Validated JSON findings |
-| Router | Code (LangGraph) | Follow the declared stages | Let a model choose the route | Records and state |
+| Workflow engine (not an agent) | Code (LangGraph) | Run the declared stages; use review results to continue, return or stop | Follow a route the project did not declare | Records and state |
 | Approver | Person | Approve or return | Skip the record | Record tied to a hash |
 
 Model names are the ones used in the recorded runs; they are set by each project. Four routes exist behind one interface: `deepseek`, `claude`, `opencode` (free models) and `ollama` (local). A step can list fallback routes, tried in order until one returns a valid result. Code: `motor/nodos.py`, `motor/modelos.py`.
@@ -47,7 +49,7 @@ Model names are the ones used in the recorded runs; they are set by each project
 
 | Choice | How it works | Code and tests |
 |---|---|---|
-| Code decides the route | A line declares stages, dependencies, gates and maximum rounds. Invalid lines are rejected | `motor/state.py`, `pruebas/test_state.py` |
+| Code controls the route | Review results are inputs; code applies the rules. A line declares stages, dependencies, gates and maximum rounds. Invalid lines are rejected | `motor/state.py`, `pruebas/test_state.py` |
 | The writer is not the reviewer | Writing is limited to DeepSeek; the reviewer runs through Claude | `motor/nodos.py`, `pruebas/test_borrador.py` |
 | Least privilege | Claude and opencode run in temporary folders. Claude can be given only two web tools | `motor/modelos.py`, `pruebas/test_modelos.py` |
 | Outgoing data is checked | A filter stops a call to a non-local model when it finds private terms or known patterns | `motor/saneo.py`, `pruebas/test_saneo.py` |
@@ -88,13 +90,13 @@ Real runs also shaped the code: the DeepSeek route now streams and rejects a res
 
 ## The larger production system
 
-These modules exist in private projects and have been used there. Connecting them to this engine is ongoing work, so their code is not included.
+These modules exist in private projects and have been used there. Connecting them to this engine is planned; their code is not included.
 
 | Module | What exists today | Evidence so far | Planned role here |
 |---|---|---|---|
 | PDFs | Markdown to PDF generator | Real documents produced | Delivery step |
 | Slide decks | Decks as data with interchangeable themes, plus a visual check | Real decks produced | Delivery and review steps |
-| Images | Batch generation through the ComfyUI API, with an image contract for decks | Both illustrations on this page | Image step with human selection |
+| Images | Batch generation through the ComfyUI API, with an image contract for decks | The banner and the pipeline background | Image step with human selection |
 | Tutorial videos | Screen recording to edited tutorial: transcription, script, voice and assembly, with gates | Rendered tutorials; automated tests | Video line |
 | Animated video | Script to keyframes, clips, voice, music and export in two languages | A pilot episode exported in Spanish and English | Video line |
 
@@ -102,7 +104,7 @@ These modules exist in private projects and have been used there. Connecting the
 
 [**A Fourier transform lecture**](examples/fourier-lecture/): instructions, notes, PDF, 13-slide deck, numerical checks and review history. It was made as a test with an earlier version of the system, before this engine.
 
-<p align="center"><a href="examples/fourier-lecture/"><img src="examples/fourier-lecture/produccion/clase-05/qa/hoja-1.png" alt="Contact sheet of the Fourier lecture deck" width="70%"></a></p>
+<p align="center"><a href="examples/fourier-lecture/"><img src="docs/img/fourier-strip.png" alt="Four slides from the Fourier lecture deck" width="100%"></a></p>
 
 ## Uses: done and next
 
@@ -110,8 +112,8 @@ These modules exist in private projects and have been used there. Connecting the
 |---|---|---|
 | Another domain | The Fourier lecture: different subject, language and type of error | Technical documentation and release notes |
 | Parallel review | Two Claude reviewers, content and sources, run in parallel outside this engine | Parallel stages and different model families |
-| Reviewer evaluation | One test with 6 planted errors | A bench that repeats it after each prompt change |
-| Code quality | This engine's controls were tested with 194 mutants | Tests and mutants as a stage for agent-written diffs |
+| Reviewer evaluation | One planted-error test | A bench that repeats it after each prompt change |
+| Code quality | Mutation tests on this engine | Tests and mutants as a stage for agent-written diffs |
 | Cost control | Tokens and cost measured per role | A spending limit that stops the line |
 | Images | ComfyUI batches and images for decks | An image stage with a human gate |
 | Business tools | Not started | CRM and databases behind the filter, with declared permissions |
