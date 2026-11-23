@@ -29,6 +29,16 @@ Language models write quickly but should not approve their own work. This engine
 6. **Cold review.** Claude reads the piece without the writer's conversation and returns structured findings: M (mechanical), R (rule) or J (judgement). M and R can go back to the writer within a fixed number of rounds. J goes to a person.
 7. **Delivery.** A person signs off. If approved content changes later, that approval and the later stages expire.
 
+### The real flow
+
+The figure above shows a typical line. This one shows the edges LangGraph compiled for a line run on 23 November 2026, which stopped at `PJ`. That line had no source checker.
+
+<p align="center"><img src="docs/img/flow.png" alt="LangGraph edges: brief, gate P1, context packs, writer, gate PM, mechanical review, cold reviewer, gate PJ, delivery, gate P4. P1, PM and P4 can return to their own stage; PJ connects to delivery, the writer and the cold reviewer." width="100%"></p>
+
+### The engine
+
+<p align="center"><img src="docs/img/engine.png" alt="Engine modules: runtime.py uses nodos.py and state.py; nodos.py uses contexto.py, revisar.py and modelos.py; modelos.py uses saneo.py and four model routes; state.py and medir.py use the project files." width="100%"></p>
+
 ## Roles and permissions
 
 Three roles use a model. The others are code or a person.
@@ -128,12 +138,15 @@ These modules exist in private projects and have been used there. Connecting the
 .venv/bin/python pruebas/mutantes/mutar.py
 python3 docs/figuras/generar.py
 python3 docs/figuras/flujo.py
+python3 docs/figuras/motor.py draw
 ```
 
-The tests use no network and spend nothing. The last two commands need matplotlib.
+The tests use no network and spend nothing. The last three commands need matplotlib.
 
 ## Scope
 
 This is a working sample that runs locally, one step at a time, with one approver. Code and templates are in Spanish. Cost and review figures come from single runs, and a clean review does not prove a piece has no errors. Current gaps: returning a piece at the review gate repeats the review instead of calling the writer; changed rules raise a warning but do not rerun a stage; and gate notes reach the model as plain text.
 
 Drafted with the engine (DeepSeek and Claude), edited with Gemini and Claude Code.
+
+Shared for evaluation. All rights reserved.
