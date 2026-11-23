@@ -1,5 +1,7 @@
 <p align="center"><img src="docs/img/banner.jpg" alt="Illustration: three stone gates under a great ash tree, joined by threads of light" width="100%"></p>
 
+<p align="center"><em>The tree is the system, the threads carry the work, and each gate waits for a person.</em></p>
+
 # sistema-produccion
 
 **A multi-model production line. In this engine, DeepSeek writes, Claude checks sources and reviews, code controls the route, and a person approves.**
