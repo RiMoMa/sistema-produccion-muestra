@@ -4,6 +4,8 @@
 
 **A multi-model production line: DeepSeek writes, Claude checks sources and reviews, code decides the route, and a person approves.**
 
+It is the core of a larger system for producing PDFs, slide decks and videos. This repository publishes the core; the production modules stay private for now.
+
 Language models write quickly but should not approve their own work. This engine gives each model one job and only the permissions that job needs. Every step leaves a record, and approvals are tied to the exact content by hash.
 
 <p align="center">
@@ -15,12 +17,7 @@ Language models write quickly but should not approve their own work. This engine
 
 ## The pipeline
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/img/pipeline-dark.svg">
-    <img alt="Pipeline: a person approves the brief; code builds context packs; DeepSeek writes; code reviews; Claude checks sources with web only; Claude cold-reviews without tools; a person approves; delivery. Findings return to the writer." src="docs/img/pipeline-light.svg" width="100%">
-  </picture>
-</p>
+<p align="center"><img src="docs/img/pipeline.png" alt="Pipeline: a person approves the brief; code builds context packs; DeepSeek writes; code reviews; Claude checks sources with web only; Claude cold-reviews without tools; a person approves; delivery. Findings return to the writer." width="100%"></p>
 
 *A typical line. Each project declares its own stages, gates and correction rounds; LangGraph runs them in order.*
 
@@ -89,13 +86,24 @@ Real runs also shaped the code: the DeepSeek route now streams and rejects a res
 | A domain | An `instancia.toml` and its rule files | `plantillas/instancia/` |
 | A gate or correction loop | A dictionary entry | `motor/state.py` |
 
+## The larger production system
+
+These modules exist in private projects and have been used there. Connecting them to this engine is ongoing work, so their code is not included.
+
+| Module | What exists today | Evidence so far | Planned role here |
+|---|---|---|---|
+| PDFs | Markdown to PDF generator | Real documents produced | Delivery step |
+| Slide decks | Decks as data with interchangeable themes, plus a visual check | Real decks produced | Delivery and review steps |
+| Images | Batch generation through the ComfyUI API, with an image contract for decks | Both illustrations on this page | Image step with human selection |
+| Tutorial videos | Screen recording to edited tutorial: transcription, script, voice and assembly, with gates | Rendered tutorials; automated tests | Video line |
+| Animated video | Script to keyframes, clips, voice, music and export in two languages | A pilot episode exported in Spanish and English | Video line |
+
 ## Possible uses and next steps
 
-None of these is built yet:
+Beyond that integration, these are ideas and are not built yet:
 
 - **Code review:** agents would propose diffs, and tests and mutants would run as a stage.
 - **Documentation and release notes:** a new domain would need only its own rules.
-- **Image production:** ComfyUI, used locally for the banner above, could become a step with its own review gate.
 - **Parallel reviewers:** different model families could review the same piece, with reports merged by rule.
 - **Evaluation bench:** planted errors would measure a reviewer before and after a prompt change.
 - **Spending cap:** the cost report could become a gate.
